@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>{% block title %}Wolken Dashboard{% endblock %}</title>
+
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+  <script src="{{ url_for('static', filename='js/script.js') }}" defer></script>
+</head>
+<body>
+
+  <!-- === NAVBAR === -->
+  <nav class="navbar">
+    <div class="nav-left">
+      <div class="menu-icon" onclick="toggleSidebar()">&#9776;</div>
+      <img src="{{ url_for('static', filename='images/home.png') }}" alt="Home" class="home-icon" onclick="window.location.href='/'">
+      <img src="{{ url_for('static', filename='images/logo.png') }}" alt="Logo" class="logo" onclick="window.location.href='/'">
+    </div>
+
+    <div class="nav-center">
+      <div class="search-bar">
+        <img src="{{ url_for('static', filename='images/search.png') }}" alt="Search" class="search-icon">
+        <input type="text" id="searchInput" placeholder="Global Search">
+        <button onclick="performSearch()">Search</button>
+      </div>
+    </div>
+
+    <div class="nav-right">
+      <a href="/about">About</a>
+      <a href="/migration">Migration</a>
+    </div>
+  </nav>
+
+  <!-- === SIDEBAR === -->
+  <div id="sidebar" class="sidebar">
+    <ul>
+      <li><a href="/creation">Creation</a></li>
+      <li><a href="/fallout">Fallout</a></li>
+      <li><a href="/reports">Reports</a></li>
+      <li><a href="/users">Users</a></li>
+    </ul>
+  </div>
+
+  <!-- === POPUP === -->
+  <div id="popup" class="popup">
+    <div class="popup-content">
+      <p id="popup-message">Page not found!</p>
+      <button onclick="closePopup()">Back to Home</button>
+    </div>
+  </div>
+
+  <!-- === PAGE CONTENT === -->
+  <div class="content">
+    {% block content %}{% endblock %}
+  </div>
+
+</body>
+</html>
