@@ -33,6 +33,14 @@ body {
   gap: 22px; /* increased spacing between hamburger, home, and logo */
 }
 
+nav {
+  height: 90px;        /* 🔹 make navbar taller */
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+
 .menu-icon {
   font-size: 24px;
   cursor: pointer;
@@ -54,8 +62,9 @@ body {
   transform: scale(1.1);
 }
 
+/* === WOLKEN LOGO === */
 .logo {
-  height: 58px;   
+  height: 80px;        /* 🔹 Increase size */
   cursor: pointer;
   transition: transform 0.2s;
 }
@@ -63,6 +72,7 @@ body {
 .logo:hover {
   transform: scale(1.05);
 }
+
 
 
 .home-icon:hover {
