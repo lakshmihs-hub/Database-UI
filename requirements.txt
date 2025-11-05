@@ -1,7 +1,8 @@
 Flask
 gunicorn
+mysql-connector-python
 pymysql
 SQLAlchemy
-mysql-connector-python
 pandas
+openpyxl
 numpy
