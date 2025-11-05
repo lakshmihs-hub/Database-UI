@@ -3,3 +3,5 @@ gunicorn
 pymysql
 SQLAlchemy
 mysql-connector-python
+pandas
+numpy
