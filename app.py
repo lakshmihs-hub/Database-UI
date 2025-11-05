@@ -10,7 +10,6 @@ app = Flask(__name__, template_folder='templates', static_folder='static')
 UPLOAD_FOLDER = "uploads"
 os.makedirs(UPLOAD_FOLDER, exist_ok=True)
 
-# Temporary storage for credentials and uploaded file
 db_credentials = {}
 uploaded_excel_path = None
 
@@ -26,7 +25,7 @@ def creation():
     return render_template('creation.html')
 
 
-# ---------------- STEP 1: CONNECT TO DATABASE ----------------
+# ---------------- STEP 1: Connect DB ----------------
 @app.route('/connect_db', methods=['POST'])
 def connect_db():
     host = request.form.get('host')
@@ -50,27 +49,27 @@ def connect_db():
             "database": database
         })
 
-        return jsonify({'status': 'success', 'message': '✅ Connected successfully!'})
+        return jsonify({'status': 'success', 'message': '? Connected successfully!'})
     except mysql.connector.Error as err:
         msg = str(err)
         if "Access denied" in msg:
-            return jsonify({'status': 'error', 'message': '❌ Invalid username or password!'})
+            return jsonify({'status': 'error', 'message': '? Invalid username or password!'})
         elif "Unknown database" in msg:
-            return jsonify({'status': 'error', 'message': '❌ Database not found!'})
+            return jsonify({'status': 'error', 'message': '? Database not found!'})
         elif "Can\'t connect" in msg:
-            return jsonify({'status': 'error', 'message': '❌ Unable to reach MySQL server!'})
+            return jsonify({'status': 'error', 'message': '? Unable to reach MySQL server!'})
         else:
-            return jsonify({'status': 'error', 'message': f'⚠️ MySQL error: {msg}'})
+            return jsonify({'status': 'error', 'message': f'?? MySQL error: {msg}'})
 
 
-# ---------------- STEP 2: UPLOAD EXCEL FILE ----------------
+# ---------------- STEP 2: Upload Excel ----------------
 @app.route('/upload', methods=['POST'])
 def upload_excel():
     global uploaded_excel_path
     file = request.files.get('file')
 
     if not file:
-        return jsonify({'status': 'error', 'message': '❌ Please select an Excel file!'})
+        return jsonify({'status': 'error', 'message': '? Please select an Excel file!'})
 
     filename = os.path.join(UPLOAD_FOLDER, file.filename)
     file.save(filename)
@@ -78,7 +77,7 @@ def upload_excel():
     try:
         df = pd.read_excel(filename)
         if df.empty:
-            return jsonify({'status': 'error', 'message': '⚠️ Excel file is empty!'})
+            return jsonify({'status': 'error', 'message': '?? Excel file is empty!'})
 
         uploaded_excel_path = filename
         row_count = len(df)
@@ -87,16 +86,16 @@ def upload_excel():
 
         return jsonify({
             'status': 'success',
-            'message': f'✅ File uploaded successfully! It contains {row_count} rows and {col_count} columns.',
+            'message': f'? File uploaded successfully! It contains {row_count} rows and {col_count} columns.',
             'rows': row_count,
             'columns': column_list
         })
 
     except Exception as e:
-        return jsonify({'status': 'error', 'message': f'⚠️ Error reading Excel: {str(e)}'})
+        return jsonify({'status': 'error', 'message': f'?? Error reading Excel: {str(e)}'})
 
 
-# ---------------- STEP 3: CREATE / RELOAD TABLE ----------------
+# ---------------- STEP 3: Create / Reload Table ----------------
 @app.route('/create_table', methods=['POST'])
 def create_table():
     global uploaded_excel_path
@@ -104,14 +103,14 @@ def create_table():
     action = request.form.get('action')  # "reload" or None
 
     if not table_name:
-        return jsonify({'status': 'error', 'message': '❌ Please enter a table name!'})
+        return jsonify({'status': 'error', 'message': '? Please enter a table name!'})
     if not uploaded_excel_path:
-        return jsonify({'status': 'error', 'message': '⚠️ Please upload Excel first!'})
+        return jsonify({'status': 'error', 'message': '?? Please upload Excel first!'})
 
     try:
         df = pd.read_excel(uploaded_excel_path)
 
-        # Auto-detect SQL data types
+        # Detect SQL data types automatically
         def detect_sql_type(series):
             if pd.api.types.is_integer_dtype(series):
                 return "INT"
@@ -129,7 +128,7 @@ def create_table():
         conn = mysql.connector.connect(**db_credentials)
         cursor = conn.cursor()
 
-        # Check if table already exists
+        # Check if table exists
         cursor.execute("SHOW TABLES LIKE %s", (table_name,))
         table_exists = cursor.fetchone()
 
@@ -150,7 +149,7 @@ def create_table():
             cursor.execute(create_query)
             conn.commit()
 
-        # Insert rows into table
+        # Insert rows
         for _, row in df.iterrows():
             values = []
             for val in row:
@@ -172,14 +171,14 @@ def create_table():
         conn.close()
 
         if action == "reload":
-            return jsonify({'status': 'success', 'message': f'✅ Table "{table_name}" reloaded successfully with {len(df)} rows!'})
+            return jsonify({'status': 'success', 'message': f'? Table "{table_name}" reloaded successfully with {len(df)} rows!'})
         else:
-            return jsonify({'status': 'success', 'message': f'✅ Table "{table_name}" created successfully with {len(df)} rows!'})
+            return jsonify({'status': 'success', 'message': f'? Table "{table_name}" created successfully with {len(df)} rows!'})
 
     except mysql.connector.Error as err:
-        return jsonify({'status': 'error', 'message': f'⚠️ MySQL Error: {err}'})
+        return jsonify({'status': 'error', 'message': f'?? MySQL Error: {err}'})
     except Exception as e:
-        return jsonify({'status': 'error', 'message': f'⚠️ Error: {str(e)}'})
+        return jsonify({'status': 'error', 'message': f'?? Error: {str(e)}'})
 
 
 # ---------------- ERROR HANDLER ----------------
@@ -190,3 +189,4 @@ def notfound(e):
 
 if __name__ == "__main__":
     app.run(debug=True, host="0.0.0.0", port=5000)
+
