@@ -7,11 +7,12 @@ function toggleSidebar() {
 document.addEventListener("click", function (event) {
   const sidebar = document.getElementById("sidebar");
   const menuIcon = document.querySelector(".menu-icon");
-  
-  // If sidebar is open and clicked area is outside both sidebar and icon → close it
-  if (sidebar.classList.contains("active") &&
-      !sidebar.contains(event.target) &&
-      !menuIcon.contains(event.target)) {
+
+  if (
+    sidebar.classList.contains("active") &&
+    !sidebar.contains(event.target) &&
+    !menuIcon.contains(event.target)
+  ) {
     sidebar.classList.remove("active");
   }
 });
@@ -28,7 +29,7 @@ function performSearch() {
     about: "/about",
     migration: "/migration",
     users: "/users",
-    home: "/"
+    home: "/",
   };
 
   if (pages[query]) {
@@ -43,6 +44,7 @@ function performSearch() {
 function closePopup() {
   document.getElementById("popup").style.display = "none";
 }
+
 document.getElementById("popup-close").addEventListener("click", closePopup);
 
 // === EVENT LISTENERS ===

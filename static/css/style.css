@@ -14,33 +14,27 @@ body {
   overflow-x: hidden;
 }
 
-/* === NAVBAR WHITE === */
+/* === NAVBAR === */
+/* === NAVBAR === */
 .navbar {
   background-color: white;
   color: #0f172a;
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 10px 40px;
-  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+  padding: 12px 40px;
+  height: 90px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
 /* === LEFT SECTION === */
-/* === LEFT SIDE NAVBAR === */
 .nav-left {
   display: flex;
   align-items: center;
-  gap: 22px; /* increased spacing between hamburger, home, and logo */
+  gap: 25px;
 }
 
-nav {
-  height: 90px;        /* 🔹 make navbar taller */
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-}
-
-
+/* === MENU ICON === */
 .menu-icon {
   font-size: 24px;
   cursor: pointer;
@@ -52,8 +46,10 @@ nav {
   transform: scale(1.1);
 }
 
+/* === SMALL HOME ICON === */
 .home-icon {
-  height: 32px;  /* slightly bigger */
+  height: 24px; /* ✅ smaller */
+  width: 24px;
   cursor: pointer;
   transition: transform 0.2s;
 }
@@ -62,39 +58,18 @@ nav {
   transform: scale(1.1);
 }
 
-/* === WOLKEN LOGO === */
+/* === BIG WOLKEN LOGO === */
 .logo {
-  height: 80px;        /* 🔹 Increase size */
+  height: 80px; /* ✅ visibly large */
   cursor: pointer;
   transition: transform 0.2s;
+  margin-left: 10px;
 }
 
 .logo:hover {
   transform: scale(1.05);
 }
 
-
-
-.home-icon:hover {
-  transform: scale(1.1);
-}
-
-/* === WOLKEN LOGO === */
-.logo {
-  height: 50px; /* 🔹 Increased size */
-  cursor: pointer;
-}
-
-
-.home-icon {
-  height: 26px;
-  cursor: pointer;
-  transition: transform 0.2s;
-}
-
-.home-icon:hover {
-  transform: scale(1.1);
-}
 
 /* === CENTER SEARCH BAR === */
 .nav-center {
@@ -127,7 +102,8 @@ nav {
 }
 
 .search-bar button {
-  background-color: #e0e0e0;
+  background-color: #0078d7;
+  color: white;
   border: none;
   border-radius: 14px;
   padding: 5px 14px;
@@ -137,7 +113,24 @@ nav {
 }
 
 .search-bar button:hover {
-  background-color: #d3d3d3;
+  background-color: #005fa3;
+}
+
+/* === NAV RIGHT === */
+.nav-right {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+
+.nav-right a {
+  color: #0f172a;
+  text-decoration: none;
+  font-weight: 500;
+}
+
+.nav-right a:hover {
+  color: #0078d7;
 }
 
 /* === SIDEBAR === */
@@ -201,7 +194,7 @@ nav {
   }
 }
 
-/* === TABLE STYLES (Users Page) === */
+/* === TABLE STYLES === */
 .table-container {
   padding: 20px;
 }
@@ -237,95 +230,6 @@ nav {
 
 .mail-link:hover {
   text-decoration: underline;
-}
-
-/* === 404 PAGE === */
-.notfound {
-  text-align: center;
-  padding: 80px 20px;
-}
-
-.back-btn {
-  display: inline-block;
-  margin-top: 20px;
-  background-color: #0f172a;
-  color: white;
-  padding: 8px 18px;
-  border-radius: 20px;
-  text-decoration: none;
-  transition: background 0.2s;
-}
-
-.back-btn:hover {
-  background-color: #1e293b;
-}
-/* === NAVBAR WHITE === */
-.navbar {
-  background-color: white;
-  color: #0f172a;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 10px 30px;
-  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-}
-
-.nav-left img.logo {
-  height: 40px;
-  cursor: pointer;
-}
-
-.nav-left .home-icon {
-  height: 30px;
-  margin-right: 10px;
-  cursor: pointer;
-}
-
-/* === SEARCH BAR === */
-.search-bar {
-  display: flex;
-  align-items: center;
-  background: #f1f5f9;
-  border-radius: 25px;
-  padding: 5px 10px;
-}
-
-.search-bar input {
-  border: none;
-  background: none;
-  outline: none;
-  padding: 8px;
-  width: 200px;
-}
-
-.search-bar button {
-  background: #0078d7;
-  color: white;
-  border: none;
-  border-radius: 20px;
-  padding: 5px 15px;
-  cursor: pointer;
-}
-
-.search-bar button:hover {
-  background: #005fa3;
-}
-
-/* === NAV RIGHT === */
-.nav-right {
-  display: flex;
-  align-items: center;
-  gap: 20px;
-}
-
-.nav-right a {
-  color: #0f172a;
-  text-decoration: none;
-  font-weight: 500;
-}
-
-.nav-right a:hover {
-  color: #0078d7;
 }
 
 /* === POPUP === */
@@ -364,6 +268,7 @@ nav {
 .popup-content button:hover {
   background: #005fa3;
 }
+
 /* === ABOUT PAGE === */
 .about {
   max-width: 1000px;
@@ -454,3 +359,4 @@ nav {
 .delay-4 { animation-delay: 0.8s; }
 .delay-5 { animation-delay: 1s; }
 .delay-6 { animation-delay: 1.2s; }
+.delay-7 { animation-delay: 1.4s; }
