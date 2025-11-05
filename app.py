@@ -10,6 +10,7 @@ app = Flask(__name__, template_folder='templates', static_folder='static')
 UPLOAD_FOLDER = "uploads"
 os.makedirs(UPLOAD_FOLDER, exist_ok=True)
 
+# Temporary storage for credentials and uploaded file
 db_credentials = {}
 uploaded_excel_path = None
 
@@ -25,7 +26,7 @@ def creation():
     return render_template('creation.html')
 
 
-# ---------------- STEP 1: Connect DB ----------------
+# ---------------- STEP 1: CONNECT TO DATABASE ----------------
 @app.route('/connect_db', methods=['POST'])
 def connect_db():
     host = request.form.get('host')
@@ -62,7 +63,7 @@ def connect_db():
             return jsonify({'status': 'error', 'message': f'⚠️ MySQL error: {msg}'})
 
 
-# ---------------- STEP 2: Upload Excel ----------------
+# ---------------- STEP 2: UPLOAD EXCEL FILE ----------------
 @app.route('/upload', methods=['POST'])
 def upload_excel():
     global uploaded_excel_path
@@ -95,7 +96,7 @@ def upload_excel():
         return jsonify({'status': 'error', 'message': f'⚠️ Error reading Excel: {str(e)}'})
 
 
-# ---------------- STEP 3: Create / Reload Table ----------------
+# ---------------- STEP 3: CREATE / RELOAD TABLE ----------------
 @app.route('/create_table', methods=['POST'])
 def create_table():
     global uploaded_excel_path
@@ -110,7 +111,7 @@ def create_table():
     try:
         df = pd.read_excel(uploaded_excel_path)
 
-        # Detect SQL data types automatically
+        # Auto-detect SQL data types
         def detect_sql_type(series):
             if pd.api.types.is_integer_dtype(series):
                 return "INT"
@@ -128,7 +129,7 @@ def create_table():
         conn = mysql.connector.connect(**db_credentials)
         cursor = conn.cursor()
 
-        # Check if table exists
+        # Check if table already exists
         cursor.execute("SHOW TABLES LIKE %s", (table_name,))
         table_exists = cursor.fetchone()
 
@@ -149,7 +150,7 @@ def create_table():
             cursor.execute(create_query)
             conn.commit()
 
-        # Insert rows
+        # Insert rows into table
         for _, row in df.iterrows():
             values = []
             for val in row:
@@ -189,5 +190,3 @@ def notfound(e):
 
 if __name__ == "__main__":
     app.run(debug=True, host="0.0.0.0", port=5000)
-
-
