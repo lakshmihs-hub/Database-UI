@@ -111,7 +111,7 @@
 
     <!-- DB Connection -->
     <div class="section">
-      <h3>1️⃣ Connect to Database</h3>
+      <h3>1?? Connect to Database</h3>
       <label>Host</label>
       <input type="text" id="host" placeholder="localhost">
 
@@ -124,26 +124,26 @@
       <label>Database</label>
       <input type="text" id="database" placeholder="mydatabase">
 
-      <button id="connectBtn">🔗 Connect</button>
+      <button id="connectBtn">?? Connect</button>
       <p id="connectMsg" class="msg"></p>
     </div>
 
     <!-- Excel Upload -->
     <div class="section">
-      <h3>2️⃣ Upload Excel File</h3>
+      <h3>2?? Upload Excel File</h3>
       <input type="file" id="excelFile" accept=".xlsx, .xls">
-      <button id="uploadBtn">📤 Upload</button>
+      <button id="uploadBtn">?? Upload</button>
       <div id="uploadMsg" class="msg"></div>
       <div id="fileCounts" class="counts" style="display:none;"></div>
     </div>
 
     <!-- Table Create -->
     <div class="section">
-      <h3>3️⃣ Create / Reload Table</h3>
+      <h3>3?? Create / Reload Table</h3>
       <label>Table Name</label>
       <input type="text" id="tableName" placeholder="Enter table name">
 
-      <button id="createTableBtn">🧩 Create Table</button>
+      <button id="createTableBtn">?? Create Table</button>
       <p id="createMsg" class="msg"></p>
     </div>
   </div>
@@ -152,8 +152,8 @@
   <div class="popup" id="reloadPopup">
     <div class="popup-content">
       <p id="popupText"></p>
-      <button id="reloadBtn">🔄 Reload</button>
-      <button id="cancelBtn">❌ Cancel</button>
+      <button id="reloadBtn">?? Reload</button>
+      <button id="cancelBtn">? Cancel</button>
     </div>
   </div>
 
@@ -247,7 +247,7 @@
 
     document.getElementById("cancelBtn").addEventListener("click", () => {
       reloadPopup.style.display = "none";
-      document.getElementById("createMsg").textContent = "⏭️ You cancelled reload.";
+      document.getElementById("createMsg").textContent = "?? You cancelled reload.";
       document.getElementById("createMsg").className = "msg info";
     });
   </script>
